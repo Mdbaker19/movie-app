@@ -10,13 +10,30 @@
 </head>
 <body>
 
-<form method="post" action="https://accidental-petite-cruiser.glitch.me/movies">
-
-</form>
 <h1 id="load">LOADING.....</h1>
 
 <div id="after">
-    <p>Will be here after request finished</p>
+
+<form method="post" action="#">
+
+<input placeholder="Title" id="title">
+    <select name="rating" id="ratingStars">
+        <option value="1">1 Star</option>
+        <option value="2">2 Stars</option>
+        <option value="3">3 Stars</option>
+        <option value="4">4 Stars</option>
+        <option value="5">5 Stars</option>
+    </select>
+    <select name="genre" id="genre">
+        <option value="action">Action</option>
+        <option value="comedy">Comedy</option>
+        <option value="drama">Drama</option>
+        <option value="animated">Animated</option>
+        <option value="horror">Horror</option>
+    </select>
+    <input type="submit">
+
+</form>
 </div>
 <script src="../JS/jQuery.js"></script>
 <script src = "../JS/movieApp.js"></script>

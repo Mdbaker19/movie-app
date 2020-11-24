@@ -1,6 +1,6 @@
 $(document).ready(function() {
     const baseURL = 'https://accidental-petite-cruiser.glitch.me/movies'
-
+    let currentMovie = []
     let movie1 = {
         "title": "up",
         "rating": "5",
@@ -12,45 +12,42 @@ $(document).ready(function() {
         "actors": "Edward Asner, Christopher Plummer, Jordan Nagai, Bob Peterson",
         "id": 1
     }
+    let title = $("#title");
+    let rating = $("#ratingStars");
+    let genre = $("#genre")
+
 
 
     //title, rating, genre
     function createMovie(i1, i2, i3){
-        return {
+        let newMovie = {
             title: i1,
             rating: i2,
-            genre: i3
+            genre: i3,
         }
+        return newMovie
     }
 
 
 
-    fetch(baseURL)
-        .then(response => response.json())
-        .then(response => {
-            console.log(response);
-            $("#after").css("display", "block");
-            $("#load").fadeOut(300);
-        });
 
 
 
 //=====POST
-const addMovie = (movie) => fetch(`${baseURL}`, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(movie)
-})
-    .then(res => res.json())
-    .then(data => {
-        console.log(`Success: created ${JSON.stringify(data)}`);
-        return data.id; // to access the primary key of the newly created entity
+    const addMovie = (movie) => fetch(`${baseURL}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(movie)
     })
-    .catch(console.error);
-
-// addMovie(movie1).then((response) => console.log(response));
+        .then(res => res.json())
+        .then(data => {
+            console.log(`Success: created ${JSON.stringify(data)}`);
+            return data.id; // to access the primary key of the newly created entity
+        })
+        .catch(console.error);
+// addMovie(createMovie('Terminator','5 Stars', "Action")).then((response) => console.log(response));
 
 
 
@@ -59,12 +56,31 @@ const addMovie = (movie) => fetch(`${baseURL}`, {
 
 
 //===== PUT => EDIT
-
+    const editMovie = movie => fetch(`${baseURL}/${movie.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movie)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(`Success: edited ${JSON.stringify(data)}`);
+        })
+        .catch(console.error);
 
 
 
 
 //======GET
+    fetch(baseURL)
+        .then(response => response.json())
+        .then(response => {
+            console.log(response);
+           currentMovie = response;
+            $("#after").css("display", "block");
+            $("#load").fadeOut(300);
+        });
 
 
 
@@ -82,7 +98,7 @@ const deleteMovie = (id) => fetch(`${baseURL}/${id}`, {
 
 // deleteMovie(1).then((data) => console.log(data));
 
-// ========= EDIT
+
 
 
 });
