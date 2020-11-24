@@ -14,26 +14,28 @@
 
 <div id="after">
 
-<form method="post" action="#">
+    <div id="formSection">
+        <input placeholder="Title" id="title">
+        <select name="rating" id="ratingStars">
+            <option value="1">1 Star</option>
+            <option value="2">2 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="5">5 Stars</option>
+        </select>
+        <select name="genre" id="genre">
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="animated">Animated</option>
+            <option value="horror">Horror</option>
+        </select>
+        <button id="submit">Submit</button>
+    </div>
+    <div class="movieSection">
 
-<input placeholder="Title" id="title">
-    <select name="rating" id="ratingStars">
-        <option value="1">1 Star</option>
-        <option value="2">2 Stars</option>
-        <option value="3">3 Stars</option>
-        <option value="4">4 Stars</option>
-        <option value="5">5 Stars</option>
-    </select>
-    <select name="genre" id="genre">
-        <option value="action">Action</option>
-        <option value="comedy">Comedy</option>
-        <option value="drama">Drama</option>
-        <option value="animated">Animated</option>
-        <option value="horror">Horror</option>
-    </select>
-    <input type="submit">
+    </div>
 
-</form>
 </div>
 <script src="../JS/jQuery.js"></script>
 <script src = "../JS/movieApp.js"></script>
