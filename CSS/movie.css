@@ -38,12 +38,13 @@ body{
     flex-direction: column;
     justify-content: space-around;
     height: 50%;
-    width: calc(100%/3);
+    width: 100%;
     align-items: center;
     color: #BEBBBB;
     background-color: #1A1423;
     border: #BEBBBB;
     border-radius: 15px;
+    margin: 5%;
 }
 .delete{
     align-self: flex-end;
@@ -52,6 +53,9 @@ body{
     border: none;
     font-size: 3em;
 }
+#forDelete{
+    display: none;
+}
 button:hover{
     cursor: pointer;
 }
@@ -59,4 +63,10 @@ button:hover{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+@media screen and (min-width: 768px){
+    .movieCard{
+        width: calc(100%/3.8);
+        margin: 5% 3%;
+    }
 }

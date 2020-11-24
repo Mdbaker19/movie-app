@@ -17,32 +17,19 @@ $(document).ready(function() {
     let genre = $("#genre")
 
 
+//======INITIAL GET==========//
+    fetch(baseURL)
+        .then(response => response.json())
+        .then(response => {
+            $("#after").css("display", "flex");
+            $("#load").fadeOut(300);
+            allMovies = response;
+            console.log(allMovies);
+            showMovies(allMovies);
+            canRemove();
+        });
 
-    function createMovie(i1, i2, i3){
-        let newMovie = {
-            title: i1,
-            rating: i2,
-            genre: i3,
-        }
-        return newMovie
-    }
-
-    function render(data){
-        let html = `<div class="movieCard">`;
-        html += `<button class="delete">X</button>`;
-        html+=`<h1>${data.title}</h1>`;
-        html+=`<p>${data.rating}</p>`;
-        html+=`<p>${data.genre}</p>`;
-        html+=`</div>`;
-        return html
-    }
-
-$("#submit").on("click", function (){
-    addMovie(createMovie(title.val(), rating.val(), genre.val())).then(response => console.log(response));
-});
-
-
-//=====POST
+//============POST============//
     const addMovie = (movie) => fetch(`${baseURL}`, {
         method: 'POST',
         headers: {
@@ -58,13 +45,7 @@ $("#submit").on("click", function (){
         })
         .catch(console.error);
 
-
-
-
-
-
-
-//===== PUT => EDIT
+//============= PUT==EDIT==============//
     const editMovie = movie => fetch(`${baseURL}/${movie.id}`, {
         method: 'PUT',
         headers: {
@@ -79,28 +60,7 @@ $("#submit").on("click", function (){
         .catch(console.error);
 
 
-
-
-//======GET
-    fetch(baseURL)
-        .then(response => response.json())
-        .then(response => {
-            $("#after").css("display", "flex");
-            $("#load").fadeOut(300);
-            allMovies = response;
-            console.log(allMovies);
-            showMovies(allMovies);
-        });
-
-
-function showMovies(arr){
-    for(let i = 0; i < arr.length; i++){
-        $(".movieSection")[0].innerHTML+= render(arr[i]);
-    }
-}
-
-
-//=======DELETE
+//===================DELETE==============//
 const deleteMovie = (id) => fetch(`${baseURL}/${id}`, {
     method: 'DELETE',
     headers: {
@@ -114,5 +74,63 @@ const deleteMovie = (id) => fetch(`${baseURL}/${id}`, {
 
 
 
+
+
+
+
+
+
+//=============OTHER FUNCTIONS=================//
+
+
+
+
+
+
+
+
+function showMovies(arr){
+    for(let i = 0; i < arr.length; i++){
+        $(".movieSection")[0].innerHTML+= render(arr[i]);
+    }
+}
+
+
+    function createMovie(i1, i2, i3){
+        let newMovie = {
+            title: i1,
+            rating: i2,
+            genre: i3,
+        }
+        return newMovie
+    }
+
+    function render(data){
+        let html = `<div class="movieCard">`;
+        html+=`<span id="forDelete">${data.id}</span>`;
+        html += `<button class="delete">X</button>`;
+        html+=`<h1>${data.title}</h1>`;
+        html+=`<p>${data.rating}</p>`;
+        html+=`<p>${data.genre}</p>`;
+        html+=`</div>`;
+        return html
+    }
+
+    $("#submit").on("click", function (){
+        addMovie(createMovie(title.val(), rating.val(), genre.val())).then(response => console.log(response));
+    });
+
+
+    function canRemove() {
+        $("body").on("click", ".delete", function () {
+            deleteMovie($(this).parent().children().first()[0].innerText).then(refresh);
+        });
+    }
+
+
+    //========THIS IS CHEATING FOR NOW, NOT SUPPOSE TO REFRESH THE PAGE========//
+    function refresh(){
+        window.location.reload();
+    }
 
 });

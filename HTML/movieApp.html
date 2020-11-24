@@ -15,8 +15,9 @@
 <div id="after">
 
     <div id="formSection">
-        <input placeholder="Title" id="title">
+        <input placeholder="Title" id="title" onfocus="this.value=''">
         <select name="rating" id="ratingStars">
+            <option value="" disabled selected>Select your Rating</option>
             <option value="1">1 Star</option>
             <option value="2">2 Stars</option>
             <option value="3">3 Stars</option>
@@ -24,6 +25,7 @@
             <option value="5">5 Stars</option>
         </select>
         <select name="genre" id="genre">
+            <option value="" disabled selected>Select your Genre</option>
             <option value="action">Action</option>
             <option value="comedy">Comedy</option>
             <option value="drama">Drama</option>
