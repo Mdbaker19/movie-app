@@ -91,9 +91,15 @@ const deleteMovie = (id) => fetch(`${baseURL}/${id}`, {
 
 function showMovies(arr){
     for(let i = 0; i < arr.length; i++){
-        $(".movieSection")[0].innerHTML+= render(arr[i]);
+        $(".movieSection")[0].insertAdjacentHTML("afterbegin", render(arr[i]));
     }
 }
+
+let url = "https://api.themoviedb.org/3/movie/550?api_key="
+fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
+    console.log(d);
+}).catch(err => console.log(err));
+
 
 
     function createMovie(i1, i2, i3){
@@ -106,14 +112,13 @@ function showMovies(arr){
     }
 
     function render(data){
-        let html = `<div class="movieCard">`;
-        html+=`<span id="forDelete">${data.id}</span>`;
-        html += `<button class="delete">X</button>`;
-        html+=`<h1>${data.title}</h1>`;
-        html+=`<p>${data.rating}</p>`;
-        html+=`<p>${data.genre}</p>`;
-        html+=`</div>`;
-        return html
+        return `<div class="movieCard">
+        <span id="forDelete">${data.id}</span>
+        <button class="delete">X</button>
+        <h1>${data.title}</h1>
+        <p>${data.rating}</p>
+        <p>${data.genre}</p>
+        </div>`;
     }
 
     $("#submit").on("click", function (){
@@ -123,14 +128,13 @@ function showMovies(arr){
 
     function canRemove() {
         $("body").on("click", ".delete", function () {
-            deleteMovie($(this).parent().children().first()[0].innerText).then(refresh);
+            deleteMovie($(this).parent().children().first()[0].innerText).then();
         });
     }
 
 
-    //========THIS IS CHEATING FOR NOW, NOT SUPPOSE TO REFRESH THE PAGE========//
-    function refresh(){
-        window.location.reload();
-    }
 
+
+//    var moviesSection = document.querySelector(".movieSection")
+// moviesSection.removeChild(moviesSection.children[2])
 });
