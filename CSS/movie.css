@@ -55,17 +55,25 @@ body{
 }
 
 .Edit{
-    align-self: flex-end;
+    align-self: center;
     background-color: #1A1423;
-    color: #BEBBBB;
+    color: #8C271E;
     border: none;
-    font-size: 3em;
+    font-size: 2em;
 }
 #edit{
     position: absolute;
-    top: 50vh;
-    left: 45vw;
+    top: 28vh;
+    left: 34vw;
+    height: 50vh;
+    width: 33vw;
     display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #bebbbb;
+    border: 3px solid black;
+    opacity: 0.8;
 }
 #forDelete{
     display: none;

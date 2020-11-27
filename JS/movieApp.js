@@ -77,17 +77,17 @@ $(document).ready(function() {
 
 
 //===================DELETE==============//
-const deleteMovie = (id) => fetch(`${baseURL}/${id}`, {
-    method: 'DELETE',
-    headers: {
-        'Content-Type': 'application/json'
-    }
-}).then(response => response.json()
-).then(() => {
-    recallGet();
-    console.log(allMovies);
-    console.log(`Success, deleted movie ${id}`);
-}).catch(error => console.log(error));
+    const deleteMovie = (id) => fetch(`${baseURL}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json()
+    ).then(() => {
+        recallGet();
+        console.log(allMovies);
+        console.log(`Success, deleted movie ${id}`);
+    }).catch(error => console.log(error));
 
 
 
@@ -119,16 +119,16 @@ const deleteMovie = (id) => fetch(`${baseURL}/${id}`, {
 
 
 
-function showMovies(arr){
-    for(let i = 0; i < arr.length; i++){
-        $(".movieSection")[0].insertAdjacentHTML("afterbegin", render(arr[i]));
+    function showMovies(arr){
+        for(let i = 0; i < arr.length; i++){
+            $(".movieSection")[0].insertAdjacentHTML("afterbegin", render(arr[i]));
+        }
     }
-}
 
-// let url = "https://api.themoviedb.org/3/movie/550?api_key="
-// fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
-//     // console.log(d);
-// }).catch(err => console.log(err));
+    let url = "https://api.themoviedb.org/3/movie/550?api_key="
+    fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
+        console.log(d);
+    }).catch(err => console.log(err));
 
 
 
@@ -145,10 +145,10 @@ function showMovies(arr){
         return `<div class="movieCard">
         <span id="forDelete">${data.id}</span>
         <button class="delete">X</button>
-        <button class="Edit">Edit</button>
         <h1>${data.title}</h1>
         <p>${data.rating}</p>
         <p>${data.genre}</p>
+        <button class="Edit">Edit</button>
         </div>`;
     }
 
@@ -163,20 +163,31 @@ function showMovies(arr){
         $("body").on("click", ".delete", function () {
             deleteMovie($(this).parent().children().first()[0].innerText).then();
             $(this).parent().remove();
+            // $(this).parent().css("display", "none");
         });
     }
+
+
     function canEdit() {
         $("body").on("click", ".Edit", function () {
+            let newId = $(this).parent().children().first()[0].innerText;
+            let card = $(this).parent();
+            let newMovieObj = {};
             $("#changeMovie").on("click",function(){
-                let newTitle = $("#changeTitle").val()
-                let newMovieObj = {
+                let newTitle = $("#changeTitle").val();
+                let newGenre = $("#changeGenre").val();
+                let newRating = $("#changeRating").val();
+                newMovieObj = {
                     title: newTitle,
-                    id: 4
+                    genre: newGenre,
+                    rating: newRating,
+                    id: newId
                 }
-                console.log(newMovieObj)
                 editMovie(newMovieObj);
+                card.html(render(newMovieObj));
+                $("#edit").css("display", "none");
             })
-            $("#edit").css("display", "block");
+            $("#edit").css("display", "flex");
 
         });
     }
