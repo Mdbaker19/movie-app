@@ -24,10 +24,22 @@ $(document).ready(function() {
             $("#after").css("display", "flex");
             $("#load").fadeOut(300);
             allMovies = response;
-            console.log(allMovies);
             showMovies(allMovies);
             canRemove();
         });
+
+    //======RECALL THE MOVIES WITH THE EDITED VERSION OF ALL MOVIES ARRAY=======//
+    function recallGet() {
+        fetch(baseURL)
+            .then(response => response.json())
+            .then(response => {
+                $("#after").css("display", "flex");
+                $("#load").fadeOut(300);
+                allMovies = response;
+                console.log(allMovies);
+                canRemove();
+            });
+    }
 
 //============POST============//
     const addMovie = (movie) => fetch(`${baseURL}`, {
@@ -68,6 +80,8 @@ const deleteMovie = (id) => fetch(`${baseURL}/${id}`, {
     }
 }).then(response => response.json()
 ).then(() => {
+    recallGet();
+    console.log(allMovies);
     console.log(`Success, deleted movie ${id}`);
 }).catch(error => console.log(error));
 
@@ -82,7 +96,19 @@ const deleteMovie = (id) => fetch(`${baseURL}/${id}`, {
 
 //=============OTHER FUNCTIONS=================//
 
-
+    const newMovie = (movie) => fetch(`${baseURL}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(movie)
+    })
+        .then(res => res.json())
+        .then(data => {
+            $(".movieSection").innerHTML += render(data);
+            return data;
+        })
+        .catch(console.error);
 
 
 
@@ -97,7 +123,7 @@ function showMovies(arr){
 
 let url = "https://api.themoviedb.org/3/movie/550?api_key="
 fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
-    console.log(d);
+    // console.log(d);
 }).catch(err => console.log(err));
 
 
@@ -122,13 +148,16 @@ fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
     }
 
     $("#submit").on("click", function (){
-        addMovie(createMovie(title.val(), rating.val(), genre.val())).then(response => console.log(response));
+        newMovie(createMovie(title.val(), rating.val(), genre.val())).then(data => {
+            $(".movieSection")[0].insertAdjacentHTML("afterbegin", render(data));
+        });
     });
 
 
     function canRemove() {
         $("body").on("click", ".delete", function () {
             deleteMovie($(this).parent().children().first()[0].innerText).then();
+            $(this).parent().remove();
         });
     }
 
