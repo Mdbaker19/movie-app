@@ -26,6 +26,7 @@ $(document).ready(function() {
             allMovies = response;
             showMovies(allMovies);
             canRemove();
+            canEdit();
         });
 
     //======RECALL THE MOVIES WITH THE EDITED VERSION OF ALL MOVIES ARRAY=======//
@@ -38,6 +39,7 @@ $(document).ready(function() {
                 allMovies = response;
                 console.log(allMovies);
                 canRemove();
+                canEdit();
             });
     }
 
@@ -58,6 +60,8 @@ $(document).ready(function() {
         .catch(console.error);
 
 //============= PUT==EDIT==============//
+
+
     const editMovie = movie => fetch(`${baseURL}/${movie.id}`, {
         method: 'PUT',
         headers: {
@@ -121,10 +125,10 @@ function showMovies(arr){
     }
 }
 
-let url = "https://api.themoviedb.org/3/movie/550?api_key="
-fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
-    // console.log(d);
-}).catch(err => console.log(err));
+// let url = "https://api.themoviedb.org/3/movie/550?api_key="
+// fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
+//     // console.log(d);
+// }).catch(err => console.log(err));
 
 
 
@@ -141,6 +145,7 @@ fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
         return `<div class="movieCard">
         <span id="forDelete">${data.id}</span>
         <button class="delete">X</button>
+        <button class="Edit">Edit</button>
         <h1>${data.title}</h1>
         <p>${data.rating}</p>
         <p>${data.genre}</p>
@@ -160,6 +165,23 @@ fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
             $(this).parent().remove();
         });
     }
+    function canEdit() {
+        $("body").on("click", ".Edit", function () {
+            $("#changeMovie").on("click",function(){
+                let newTitle = $("#changeTitle").val()
+                let newMovieObj = {
+                    title: newTitle,
+                    id: 4
+                }
+                console.log(newMovieObj)
+                editMovie(newMovieObj);
+            })
+            $("#edit").css("display", "block");
+
+        });
+    }
+
+
 
 
 

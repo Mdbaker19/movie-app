@@ -53,6 +53,20 @@ body{
     border: none;
     font-size: 3em;
 }
+
+.Edit{
+    align-self: flex-end;
+    background-color: #1A1423;
+    color: #BEBBBB;
+    border: none;
+    font-size: 3em;
+}
+#edit{
+    position: absolute;
+    top: 50vh;
+    left: 45vw;
+    display: none;
+}
 #forDelete{
     display: none;
 }
