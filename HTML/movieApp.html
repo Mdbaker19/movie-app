@@ -44,11 +44,25 @@
         </label>
         <label>
             new rating
-            <input id="changeRating">
+            <select name="rating" id="changeRating">
+                <option value="" disabled selected>Select your Rating</option>
+                <option value="1">1 Star</option>
+                <option value="2">2 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="5">5 Stars</option>
+            </select>
         </label>
         <label>
             new genre
-            <input id="changeGenre">
+            <select name="genre" id="changeGenre">
+                <option value="" disabled selected>Select your Genre</option>
+                <option value="action">Action</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+                <option value="animated">Animated</option>
+                <option value="horror">Horror</option>
+            </select>
         </label>
         <button id="changeMovie">Edit</button>
     </div>

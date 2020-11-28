@@ -1,20 +1,12 @@
 $(document).ready(function() {
     const baseURL = 'https://accidental-petite-cruiser.glitch.me/movies';
+    const url = "https://api.themoviedb.org/3/movie/600?api_key=";//=====THE 600 IS CURRENTLY FULL METAL JACKET
+    const allURL = `https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=`;
+    const posterPath = "https://image.tmdb.org/t/p/w500";
     let allMovies = [];
-    let movie1 = {
-        "title": "up",
-        "rating": "5",
-        "poster": "https: //m.media-amazon.com/images/M/MV5BMTk3NDE2NzI4NF5BMl5BanBnXkFtZTgwNzE1MzEyMTE@._V1_SX300.jpg",
-        "year": "2009",
-        "genre": "Animation, Adventure, Comedy, Family",
-        "director": "Pete Docter, Bob Peterson(co-director)",
-        "plot": "78-year-old Carl Fredricksen travels to Paradise Falls in his house equipped with balloons, inadvertently taking a young stowaway.",
-        "actors": "Edward Asner, Christopher Plummer, Jordan Nagai, Bob Peterson",
-        "id": 1
-    }
     let title = $("#title");
     let rating = $("#ratingStars");
-    let genre = $("#genre")
+    let genre = $("#genre");
 
 
 //======INITIAL GET==========//
@@ -43,8 +35,9 @@ $(document).ready(function() {
             });
     }
 
-//============POST============//
-    const addMovie = (movie) => fetch(`${baseURL}`, {
+
+    //========POST===============//
+    const newMovie = (movie) => fetch(`${baseURL}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -54,10 +47,10 @@ $(document).ready(function() {
         .then(res => res.json())
         .then(data => {
             $(".movieSection").innerHTML += render(data);
-            console.log(`Success: created ${JSON.stringify(data)}`);
-            return data.id; // to access the primary key of the newly created entity
+            return data;
         })
         .catch(console.error);
+
 
 //============= PUT==EDIT==============//
 
@@ -100,19 +93,22 @@ $(document).ready(function() {
 
 //=============OTHER FUNCTIONS=================//
 
-    const newMovie = (movie) => fetch(`${baseURL}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(movie)
-    })
-        .then(res => res.json())
-        .then(data => {
-            $(".movieSection").innerHTML += render(data);
-            return data;
-        })
-        .catch(console.error);
+    fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
+        let img = `<img src="${posterPath}${d.poster_path}">`
+        $(".movieSection")[0].insertAdjacentHTML("afterbegin", img);
+    }).catch(err => console.log(err));
+
+
+    function getMovieData(movieTitle) {
+        fetch(`${allURL}${movieTitle}`).then(r => r.json()).then(d => {
+            console.log(d.results[0].poster_path);
+            return d.results[0].poster_path;
+        });
+    }
+
+    getMovieData("up");
+
+
 
 
 
@@ -124,11 +120,6 @@ $(document).ready(function() {
             $(".movieSection")[0].insertAdjacentHTML("afterbegin", render(arr[i]));
         }
     }
-
-    let url = "https://api.themoviedb.org/3/movie/550?api_key="
-    fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
-        console.log(d);
-    }).catch(err => console.log(err));
 
 
 
@@ -145,6 +136,7 @@ $(document).ready(function() {
         return `<div class="movieCard">
         <span id="forDelete">${data.id}</span>
         <button class="delete">X</button>
+        <img src="${posterPath}${getMovieData(data.title)}" alt="movieImage">
         <h1>${data.title}</h1>
         <p>${data.rating}</p>
         <p>${data.genre}</p>
@@ -163,7 +155,6 @@ $(document).ready(function() {
         $("body").on("click", ".delete", function () {
             deleteMovie($(this).parent().children().first()[0].innerText).then();
             $(this).parent().remove();
-            // $(this).parent().css("display", "none");
         });
     }
 
@@ -171,7 +162,7 @@ $(document).ready(function() {
     function canEdit() {
         $("body").on("click", ".Edit", function () {
             let newId = $(this).parent().children().first()[0].innerText;
-            let card = $(this).parent();
+            let card = $(this);
             let newMovieObj = {};
             $("#changeMovie").on("click",function(){
                 let newTitle = $("#changeTitle").val();
@@ -184,7 +175,7 @@ $(document).ready(function() {
                     id: newId
                 }
                 editMovie(newMovieObj);
-                card.html(render(newMovieObj));
+                card.parent().html(render(newMovieObj));
                 $("#edit").css("display", "none");
             })
             $("#edit").css("display", "flex");
