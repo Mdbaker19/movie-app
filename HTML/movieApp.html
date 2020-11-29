@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="../CSS/movie.css">
 </head>
 <body>
-
-<h1 id="load">LOADING.....</h1>
+<div id="load">
+    <h1 id="loading">LOADING.....</h1>
+</div>
 
 <div id="after">
 
@@ -38,13 +39,14 @@
 
     </div>
     <div id="edit">
+        <button id="closeEdit">X</button>
         <label>
             new title
-            <input id="changeTitle">
+            <input id="changeTitle" class="editInput">
         </label>
         <label>
             new rating
-            <select name="rating" id="changeRating">
+            <select name="rating" id="changeRating" class="editInput">
                 <option value="" disabled selected>Select your Rating</option>
                 <option value="1">1 Star</option>
                 <option value="2">2 Stars</option>
@@ -55,7 +57,7 @@
         </label>
         <label>
             new genre
-            <select name="genre" id="changeGenre">
+            <select name="genre" id="changeGenre" class="editInput">
                 <option value="" disabled selected>Select your Genre</option>
                 <option value="action">Action</option>
                 <option value="comedy">Comedy</option>

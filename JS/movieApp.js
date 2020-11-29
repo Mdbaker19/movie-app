@@ -1,8 +1,7 @@
 $(document).ready(function() {
     const baseURL = 'https://accidental-petite-cruiser.glitch.me/movies';
-    const url = "https://api.themoviedb.org/3/movie/600?api_key=";//=====THE 600 IS CURRENTLY FULL METAL JACKET
     const allURL = `https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=`;
-    const posterPath = "https://image.tmdb.org/t/p/w500";
+    const posterPath = "https://image.tmdb.org/t/p/w400";
     let allMovies = [];
     let title = $("#title");
     let rating = $("#ratingStars");
@@ -92,27 +91,13 @@ $(document).ready(function() {
 
 
 //=============OTHER FUNCTIONS=================//
-
-    fetch(`${url}${movieKey}`).then((r) => r.json()).then(d => {
-        let img = `<img src="${posterPath}${d.poster_path}">`
-        $(".movieSection")[0].insertAdjacentHTML("afterbegin", img);
-    }).catch(err => console.log(err));
-
-
     function getMovieData(movieTitle) {
-        fetch(`${allURL}${movieTitle}`).then(r => r.json()).then(d => {
-            console.log(d.results[0].poster_path);
+        fetch(`${allURL}${movieTitle}`).then((r) => r.json()).then(d => {
+            let img = `<img src="${posterPath}${d.results[0].poster_path}">`;
+            $(".movieSection")[0].insertAdjacentHTML("beforeend", img);
             return d.results[0].poster_path;
         });
     }
-
-    getMovieData("up");
-
-
-
-
-
-
 
 
     function showMovies(arr){
@@ -136,13 +121,15 @@ $(document).ready(function() {
         return `<div class="movieCard">
         <span id="forDelete">${data.id}</span>
         <button class="delete">X</button>
-        <img src="${posterPath}${getMovieData(data.title)}" alt="movieImage">
-        <h1>${data.title}</h1>
+        <img src="${posterPath}${getMovieData(data.title)}" class="poster" alt="movieImage">
+        <h1 class="titleOnPoster">${data.title}</h1>
         <p>${data.rating}</p>
         <p>${data.genre}</p>
         <button class="Edit">Edit</button>
         </div>`;
     }
+
+
 
     $("#submit").on("click", function (){
         newMovie(createMovie(title.val(), rating.val(), genre.val())).then(data => {
@@ -177,7 +164,10 @@ $(document).ready(function() {
                 editMovie(newMovieObj);
                 card.parent().html(render(newMovieObj));
                 $("#edit").css("display", "none");
-            })
+            });
+            $("#closeEdit").on("click", function (){
+                $("#edit").css("display", "none");
+            });
             $("#edit").css("display", "flex");
 
         });
