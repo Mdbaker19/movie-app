@@ -22,7 +22,6 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(251,251,255,.7);
     color: #FBFBFF;
 }
 .movieSection{
@@ -39,7 +38,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 70%;
+    height: 90%;
     width: 100%;
     align-items: center;
     color: #FBFBFF;
@@ -47,6 +46,10 @@ body{
     border: 6px solid #1a1423;
     border-radius: 5px;
     margin: 5%;
+}
+.posterImage{
+    width: 90%;
+    height: 70%;
 }
 .poster{
     width: 95%;
@@ -119,7 +122,9 @@ button:hover{
     .movieCard{
         width: calc(100%/2.5);
         margin: 2% 3%;
-        height: 90%;
+    }
+    .posterImage{
+        height: 65%;
     }
     #edit{
         top: 28vh;

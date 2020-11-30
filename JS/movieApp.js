@@ -91,18 +91,20 @@ $(document).ready(function() {
 
 
 //=============OTHER FUNCTIONS=================//
+    let counter = 0;
     function getMovieData(movieTitle) {
         fetch(`${allURL}${movieTitle}`).then((r) => r.json()).then(d => {
-            let img = `<img src="${posterPath}${d.results[0].poster_path}">`;
-            $(".movieSection")[0].insertAdjacentHTML("beforeend", img);
-            return d.results[0].poster_path;
+            let img = `<img src="${posterPath}${d.results[0].poster_path}" class="posterImage">`;
+            $(".movieCard")[counter].insertAdjacentHTML("beforeend", img);
+            counter++;
+            // return d.results[0].poster_path;
         });
     }
 
 
     function showMovies(arr){
         for(let i = 0; i < arr.length; i++){
-            $(".movieSection")[0].insertAdjacentHTML("afterbegin", render(arr[i]));
+            $(".movieSection")[0].insertAdjacentHTML("beforeend", render(arr[i]));
         }
     }
 
@@ -117,11 +119,12 @@ $(document).ready(function() {
         return newMovie
     }
 
+        // <img src="${posterPath}${getMovieData(data.title)}" class="poster" alt="movieImage">
     function render(data){
+        getMovieData(data.title);
         return `<div class="movieCard">
         <span id="forDelete">${data.id}</span>
         <button class="delete">X</button>
-        <img src="${posterPath}${getMovieData(data.title)}" class="poster" alt="movieImage">
         <h1 class="titleOnPoster">${data.title}</h1>
         <p>${data.rating}<i class="far fa-star"></i></p>
         <p>${data.genre}</p>
@@ -151,7 +154,7 @@ $(document).ready(function() {
     function canEdit() {
         $("body").on("click", ".Edit", function () {
             let newId = $(this).parent().children().first()[0].innerText;
-            let card = $(this);
+            let card = $(this).parent();
             let newMovieObj = {};
             $("#changeMovie").on("click",function(){
                 let newTitle = $("#changeTitle").val();
@@ -164,7 +167,7 @@ $(document).ready(function() {
                     id: newId
                 }
                 editMovie(newMovieObj);
-                card.parent().html(render(newMovieObj));
+                card.html(render(newMovieObj));
                 $("#edit").css("display", "none");
             });
             $("#closeEdit").on("click", function (){
