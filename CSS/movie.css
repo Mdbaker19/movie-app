@@ -12,9 +12,9 @@
     align-items: center;
 }
 body{
-    background: rgb(251,251,255);
-    background: radial-gradient(circle, rgba(251,251,255,1) 14%, rgba(12,12,12,1) 93%);
-    font-size: 12px;
+    background: rgb(185,185,186);
+    background: radial-gradient(circle, rgba(185,185,186,1) 19%, rgba(65,65,63,1) 66%, rgba(12,12,1,1) 89%);
+    font-size: 11px;
 }
 #formSection{
     width: 100vw;
@@ -141,9 +141,22 @@ button:hover{
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background-image: url("../img/movieReelBackground.jpg");
-    background-size: cover;
+}
+#projector{
+    background-image: url("../img/projector.png");
+    background-position: center;
     background-repeat: no-repeat;
+    width: 33%;
+    height: 100%;
+    margin-left: -20%;
+}
+#loading{
+    background-color: #c2bfbf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 33%;
 }
 .starColor{
     color: #e0cf28;
@@ -164,7 +177,7 @@ button:hover{
 }
 @media screen and (min-width: 768px){
     body{
-        font-size: 14px;
+        font-size: 13px;
     }
     .movieCard{
         width: calc(100%/2.5);
@@ -182,7 +195,12 @@ button:hover{
 }
 @media screen and (min-width: 1000px){
     body{
-        font-size: 16px;
+        font-size: 15px;
+    }
+}
+@media screen and (min-width: 1400px){
+    .movieCard{
+        width: calc(100%/3.7);
     }
 }
 

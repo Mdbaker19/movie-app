@@ -7,13 +7,28 @@ $(document).ready(function() {
     let rating = $("#ratingStars");
     let genre = $("#genre");
 
+    let flick = setInterval(flicker, 100);
+    let normalize = setInterval(normal, 176);
+
+    function flicker(){
+        $("#loading").css("opacity", ".2");
+    }
+    function normal(){
+        $("#loading").css("opacity", "1");
+    }
+    function stopFlicker(){
+        clearInterval(flick);
+        clearInterval(normalize);
+    }
+
 
 //======INITIAL GET==========//
     fetch(baseURL)
         .then(response => response.json())
         .then(response => {
+            setTimeout(stopFlicker, 1500);
             $("#after").css("display", "flex");
-            $("#load").fadeOut(300);
+            $("#load").fadeOut(1500);
             allMovies = response;
             showMovies(allMovies);
             canRemove();
@@ -26,7 +41,7 @@ $(document).ready(function() {
             .then(response => response.json())
             .then(response => {
                 $("#after").css("display", "flex");
-                $("#load").fadeOut(300);
+                $("#load").fadeOut(1500);
                 allMovies = response;
                 console.log(allMovies);
                 canRemove();
