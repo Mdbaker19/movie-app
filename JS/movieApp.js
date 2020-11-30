@@ -1,7 +1,7 @@
 $(document).ready(function() {
     const baseURL = 'https://accidental-petite-cruiser.glitch.me/movies';
     const allURL = `https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=`;
-    const posterPath = "https://image.tmdb.org/t/p/w400";
+    const posterURL = "https://image.tmdb.org/t/p/w400";
     let allMovies = [];
     let title = $("#title");
     let rating = $("#ratingStars");
@@ -45,7 +45,6 @@ $(document).ready(function() {
     })
         .then(res => res.json())
         .then(data => {
-            $(".movieSection").innerHTML += render(data);
             return data;
         })
         .catch(console.error);
@@ -91,20 +90,20 @@ $(document).ready(function() {
 
 
 //=============OTHER FUNCTIONS=================//
-    let counter = 0;
-    function getMovieData(movieTitle) {
-        fetch(`${allURL}${movieTitle}`).then((r) => r.json()).then(d => {
-            let img = `<img src="${posterPath}${d.results[0].poster_path}" class="posterImage">`;
-            $(".movieCard")[counter].insertAdjacentHTML("beforeend", img);
-            counter++;
-            // return d.results[0].poster_path;
-        });
+    async function getMovieData(movieTitle) {
+        let poster;
+        await fetch(`${allURL}${movieTitle}`).then((r) => r.json()).then(data => {
+            poster = data.results[0].poster_path;
+        }).catch(err => console.log(err));
+        return poster;
     }
 
 
-    function showMovies(arr){
+
+
+    async function showMovies(arr){
         for(let i = 0; i < arr.length; i++){
-            $(".movieSection")[0].insertAdjacentHTML("beforeend", render(arr[i]));
+            $(".movieSection")[0].insertAdjacentHTML("beforeend", await render(arr[i]));
         }
     }
 
@@ -119,24 +118,24 @@ $(document).ready(function() {
         return newMovie
     }
 
-        // <img src="${posterPath}${getMovieData(data.title)}" class="poster" alt="movieImage">
-    function render(data){
-        getMovieData(data.title);
+
+    async function render(data){
         return `<div class="movieCard">
-        <span id="forDelete">${data.id}</span>
-        <button class="delete">X</button>
-        <h1 class="titleOnPoster">${data.title}</h1>
-        <p>${data.rating}<i class="far fa-star"></i></p>
-        <p>${data.genre}</p>
-        <button class="Edit">Edit</button>
-        </div>`;
+                    <span id="forDelete">${data.id}</span>
+                    <button class="delete">X</button>
+                    <h1 class="titleOnPoster">${data.title}</h1>
+                    <img src="${posterURL}${await getMovieData(data.title)}" class="poster" alt="movieImage">
+                    <p>${data.rating}<i class="far fa-star"></i></p>
+                    <p>${data.genre}</p>
+                    <button class="Edit">Edit</button>
+                </div>`;
     }
 
 
 
     $("#submit").on("click", function (){
-        newMovie(createMovie(title.val(), rating.val(), genre.val())).then(data => {
-            $(".movieSection")[0].insertAdjacentHTML("afterbegin", render(data));
+        newMovie(createMovie(title.val(), rating.val(), genre.val())).then(async data => {
+            $(".movieSection")[0].insertAdjacentHTML("afterbegin", await render(data));
         });
         $(this).parent().css("display", "none");
         $("#displayForm").css("display", "flex");
@@ -156,7 +155,7 @@ $(document).ready(function() {
             let newId = $(this).parent().children().first()[0].innerText;
             let card = $(this).parent();
             let newMovieObj = {};
-            $("#changeMovie").on("click",function(){
+            $("#changeMovie").on("click",async function(){
                 let newTitle = $("#changeTitle").val();
                 let newGenre = $("#changeGenre").val();
                 let newRating = $("#changeRating").val();
@@ -167,7 +166,7 @@ $(document).ready(function() {
                     id: newId
                 }
                 editMovie(newMovieObj);
-                card.html(render(newMovieObj));
+                card.replaceWith(await render(newMovieObj));
                 $("#edit").css("display", "none");
             });
             $("#closeEdit").on("click", function (){
