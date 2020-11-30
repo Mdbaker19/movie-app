@@ -122,10 +122,10 @@ $(document).ready(function() {
     async function render(data){
         return `<div class="movieCard">
                     <span id="forDelete">${data.id}</span>
-                    <button class="delete">X</button>
+                    <button class="delete"><i class="fas fa-times-circle deleteIcon"></i></button>
                     <h1 class="titleOnPoster">${data.title}</h1>
                     <img src="${posterURL}${await getMovieData(data.title)}" class="poster" alt="movieImage">
-                    <p>${data.rating}<i class="far fa-star"></i></p>
+                    <p>${data.rating}<i class="far fa-star starColor"></i></p>
                     <p>${data.genre}</p>
                     <button class="Edit">Edit</button>
                 </div>`;

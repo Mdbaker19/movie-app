@@ -118,6 +118,13 @@ button:hover{
     background-size: cover;
     background-repeat: no-repeat;
 }
+.starColor{
+    color: #e0cf28;
+}
+
+.deleteIcon{
+    color: #830c28;
+}
 @media screen and (min-width: 768px){
     .movieCard{
         width: calc(100%/2.5);
@@ -133,3 +140,4 @@ button:hover{
         width: 33vw;
     }
 }
+
