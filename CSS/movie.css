@@ -143,20 +143,22 @@ button:hover{
     height: 100vh;
 }
 #projector{
-    background-image: url("../img/projector.png");
-    background-position: center;
-    background-repeat: no-repeat;
     width: 33%;
     height: 100%;
-    margin-left: -20%;
+    display: flex;
+    align-items: center;
+}
+#loadProjector{
+    width: 192px;
+    margin-left: -63%;
 }
 #loading{
     background-color: #c2bfbf;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50%;
-    width: 33%;
+    height: 25%;
+    width: 54%;
 }
 .starColor{
     color: #e0cf28;
@@ -173,6 +175,13 @@ button:hover{
 @media screen and (min-width: 425px){
     .formBox{
         width: fit-content;
+    }
+    #loadProjector{
+        width: 250px;
+    }
+    #loading{
+        height: 30%;
+        width: 59%;
     }
 }
 @media screen and (min-width: 768px){
@@ -192,15 +201,37 @@ button:hover{
         height: 50vh;
         width: 33vw;
     }
+    #loading{
+        height: 50%;
+    }
+    #loadProjector {
+        width: 450px;
+        margin-left: -90%;
+    }
 }
 @media screen and (min-width: 1000px){
     body{
         font-size: 15px;
     }
+    #loadProjector {
+        width: 650px;
+        margin-left: -90%;
+    }
+    #loading{
+        height: 60%;
+        width: 60%;
+    }
 }
 @media screen and (min-width: 1400px){
     .movieCard{
         width: calc(100%/3.7);
+    }
+    #loading{
+        height: 65%;
+    }
+    #loadProjector {
+        width: 875px;
+        margin-left: -90%;
     }
 }
 

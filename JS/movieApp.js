@@ -59,7 +59,6 @@ $(document).ready(function() {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             return data;
         })
         .catch(console.error);
@@ -109,7 +108,6 @@ $(document).ready(function() {
         let poster;
         await fetch(`${allURL}${movieTitle}`).then((r) => r.json()).then(data => {
             poster = data.results[0].poster_path;
-            console.log(data.results[0]);
         }).catch(err => console.log(err));
         return poster;
     }
