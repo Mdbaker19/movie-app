@@ -178,10 +178,14 @@ $(document).ready(function() {
     }
 
 
-    $("#displayForm").on("click", function (){
-       $("#formSection").css("display", "flex");
-       $(this).css("display", "none");
-    });
+$("#formSection").on("mouseenter",function(){
+    $(this).css('opacity','100%')
+})
+
+$("#formSection").on("mouseleave",function(){
+    $(this).css('opacity','10%')
+})
+
 
 
 

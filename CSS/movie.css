@@ -16,13 +16,38 @@ body{
     background: radial-gradient(circle, rgba(251,251,255,1) 14%, rgba(12,12,12,1) 93%);
 }
 #formSection{
-    width: fit-content;
+    width: 100vw;
     height: 15vh;
-    display: none;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    background-color: #99999b;
     color: #FBFBFF;
+    opacity: 10%;
+}
+.formBox{
+    background-color: #8c8c90;
+    border: none;
+}
+.bannerHead{
+   text-align: center;
+
+}
+.bannerInput{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+#submit{
+    margin-top: .5em;
+    height: fit-content;
+    border-radius: 4px;
+    border: none;
+    background-color: #99999b;
+    color: #830c28;
+    font-size: 1.5em;
+
 }
 .movieSection{
     width: 100vw;
@@ -122,7 +147,23 @@ button:hover{
     color: #e0cf28;
 }
 
+.ratingStars{
+    position: relative;
+}
+.starsDropUp{
+    position: absolute;
+    bottom: 50px;
+    z-index: 1;
+}
+
 .deleteIcon{
+    color: #830c28;
+}
+
+.fancy{
+    font-family: 'Sansita Swashed', cursive;
+    text-align: center;
+    font-size: 1.5em;
     color: #830c28;
 }
 @media screen and (min-width: 768px){

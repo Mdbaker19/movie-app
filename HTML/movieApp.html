@@ -6,6 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>initial</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/movie.css">
 </head>
 <body>
@@ -14,27 +16,44 @@
 </div>
 
 <div id="after">
-    <button id="displayForm">Add a Movie</button>
+
     <div id="formSection">
-        <input placeholder="Title" id="title" onfocus="this.value=''">
-        <select name="rating" id="ratingStars">
-            <option value="" disabled selected>Select your Rating</option>
+        <div class ="bannerHead fancy">
+            <h3 class ="fancy">Add Another Movie</h3>
+        </div>
+        <div class ="bannerInput">
+        <div>
+            <h4 class ="fancy">Title</h4>
+        <input  id="title" class="formBox"  onfocus="this.value=''">
+        </div>
+        <div>
+            <h4 class ="fancy">Rating</h4>
+        <select name="rating" id="ratingStars" class="formBox">
+            <div class ="starsDropUp">
+            <option value="" disabled selected></option>
             <option value="1">1 Star</option>
             <option value="2">2 Stars</option>
             <option value="3">3 Stars</option>
             <option value="4">4 Stars</option>
             <option value="5">5 Stars</option>
+            </div>
         </select>
-        <select name="genre" id="genre">
-            <option value="" disabled selected>Select your Genre</option>
+        </div>
+        <div>
+        <h4 class ="fancy">Genre</h4>
+        <select name="genre" id="genre" class="formBox">
+            <option value="" disabled selected></option>
             <option value="action">Action</option>
             <option value="comedy">Comedy</option>
             <option value="drama">Drama</option>
             <option value="animated">Animated</option>
             <option value="horror">Horror</option>
         </select>
+        </div>
         <button id="submit">Submit</button>
     </div>
+    </div>
+
     <div class="movieSection">
 
     </div>
