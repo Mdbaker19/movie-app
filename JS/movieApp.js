@@ -123,7 +123,7 @@ $(document).ready(function() {
         <button class="delete">X</button>
         <img src="${posterPath}${getMovieData(data.title)}" class="poster" alt="movieImage">
         <h1 class="titleOnPoster">${data.title}</h1>
-        <p>${data.rating}</p>
+        <p>${data.rating}<i class="far fa-star"></i></p>
         <p>${data.genre}</p>
         <button class="Edit">Edit</button>
         </div>`;
@@ -135,6 +135,8 @@ $(document).ready(function() {
         newMovie(createMovie(title.val(), rating.val(), genre.val())).then(data => {
             $(".movieSection")[0].insertAdjacentHTML("afterbegin", render(data));
         });
+        $(this).parent().css("display", "none");
+        $("#displayForm").css("display", "flex");
     });
 
 
@@ -174,6 +176,10 @@ $(document).ready(function() {
     }
 
 
+    $("#displayForm").on("click", function (){
+       $("#formSection").css("display", "flex");
+       $(this).css("display", "none");
+    });
 
 
 

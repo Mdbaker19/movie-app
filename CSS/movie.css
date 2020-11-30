@@ -12,17 +12,18 @@
     align-items: center;
 }
 body{
-    background-color: #c1c1c1;
+    background: rgb(251,251,255);
+    background: radial-gradient(circle, rgba(251,251,255,1) 14%, rgba(12,12,12,1) 93%);
 }
 #formSection{
-    width: 100vw;
+    width: fit-content;
     height: 15vh;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #712019;
-    color: #BEBBBB;
+    background-color: rgba(251,251,255,.7);
+    color: #FBFBFF;
 }
 .movieSection{
     width: 100vw;
@@ -38,11 +39,11 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 90%;
+    height: 70%;
     width: 100%;
     align-items: center;
-    color: #bebbbb;
-    background-color: #767676;
+    color: #FBFBFF;
+    background-color: #646E78;
     border: 6px solid #1a1423;
     border-radius: 5px;
     margin: 5%;
@@ -57,7 +58,7 @@ body{
 }
 .delete{
     align-self: flex-end;
-    background-color: #767676;
+    background-color: #646E78;
     color: #BEBBBB;
     border: none;
     font-size: 3em;
@@ -78,8 +79,8 @@ label{
 }
 .Edit{
     align-self: center;
-    background-color: #767676;
-    color: #FFEB3B;
+    background-color: #646E78;
+    color: #F5E663;
     border: none;
     border-radius: 5px;
     font-size: 2em;
@@ -94,7 +95,7 @@ label{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: #bebbbb;
+    background-color: #FBFBFF;
     border: 3px solid black;
     opacity: 0.8;
 }
@@ -118,6 +119,7 @@ button:hover{
     .movieCard{
         width: calc(100%/2.5);
         margin: 2% 3%;
+        height: 90%;
     }
     #edit{
         top: 28vh;
