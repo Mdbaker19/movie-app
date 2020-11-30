@@ -54,13 +54,13 @@
 
     </div>
     <div id="edit">
-        <button id="closeEdit">X</button>
+        <button id="closeEdit"><i class="fas fa-times-circle deleteIcon"></i></button>
         <label>
-            new title
+            New Title
             <input id="changeTitle" class="editInput">
         </label>
         <label>
-            new rating
+            New Rating
             <select name="rating" id="changeRating" class="editInput">
                 <option value="" disabled selected>Select your Rating</option>
                 <option value="1">1 Star</option>
@@ -71,15 +71,8 @@
             </select>
         </label>
         <label>
-            new genre
-            <select name="genre" id="changeGenre" class="editInput">
-                <option value="" disabled selected>Select your Genre</option>
-                <option value="action">Action</option>
-                <option value="comedy">Comedy</option>
-                <option value="drama">Drama</option>
-                <option value="animated">Animated</option>
-                <option value="horror">Horror</option>
-            </select>
+            New Genre
+            <input name="genre" id="changeGenre" class="editInput">
         </label>
         <button id="changeMovie">Edit</button>
     </div>

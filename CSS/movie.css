@@ -98,14 +98,17 @@ label{
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #830c27;
 }
 .editInput{
 }
 #closeEdit{
     align-self: flex-end;
-    width: 10%;
-    height: 7%;
+    width: 15%;
+    height: 10%;
     margin-top: -5%;
+    background-color: #646E78;
+    border-radius: 3px;
 }
 .Edit{
     align-self: center;
@@ -125,9 +128,16 @@ label{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: #FBFBFF;
+    background-color: #646E78;
     border: 3px solid black;
-    opacity: 0.8;
+    border-radius: 5px;
+    opacity: 0.85;
+}
+#changeMovie{
+    background-color: #646E78;
+    color: #F5E663;
+    font-size: 2em;
+    border: none;
 }
 #forDelete{
     display: none;
@@ -234,4 +244,3 @@ button:hover{
         margin-left: -90%;
     }
 }
-
