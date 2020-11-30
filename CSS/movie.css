@@ -14,6 +14,7 @@
 body{
     background: rgb(251,251,255);
     background: radial-gradient(circle, rgba(251,251,255,1) 14%, rgba(12,12,12,1) 93%);
+    font-size: 12px;
 }
 #formSection{
     width: 100vw;
@@ -29,6 +30,7 @@ body{
 .formBox{
     background-color: #8c8c90;
     border: none;
+    width: 77px;
 }
 .bannerHead{
    text-align: center;
@@ -78,7 +80,7 @@ body{
 }
 .poster{
     width: 95%;
-    height: 75%;
+    height: 70%;
     margin: 0 auto;
 }
 .titleOnPoster{
@@ -146,27 +148,24 @@ button:hover{
 .starColor{
     color: #e0cf28;
 }
-
-.ratingStars{
-    position: relative;
-}
-.starsDropUp{
-    position: absolute;
-    bottom: 50px;
-    z-index: 1;
-}
-
 .deleteIcon{
     color: #830c28;
 }
-
 .fancy{
     font-family: 'Sansita Swashed', cursive;
     text-align: center;
     font-size: 1.5em;
     color: #830c28;
 }
+@media screen and (min-width: 425px){
+    .formBox{
+        width: fit-content;
+    }
+}
 @media screen and (min-width: 768px){
+    body{
+        font-size: 14px;
+    }
     .movieCard{
         width: calc(100%/2.5);
         margin: 2% 3%;
@@ -179,6 +178,11 @@ button:hover{
         left: 34vw;
         height: 50vh;
         width: 33vw;
+    }
+}
+@media screen and (min-width: 1000px){
+    body{
+        font-size: 16px;
     }
 }
 

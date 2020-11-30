@@ -123,7 +123,7 @@ $(document).ready(function() {
         return `<div class="movieCard">
                     <span id="forDelete">${data.id}</span>
                     <button class="delete"><i class="fas fa-times-circle deleteIcon"></i></button>
-                    <h1 class="titleOnPoster">${data.title}</h1>
+                    <h2 class="titleOnPoster">${data.title}</h2>
                     <img src="${posterURL}${await getMovieData(data.title)}" class="poster" alt="movieImage">
                     <p>${data.rating}<i class="far fa-star starColor"></i></p>
                     <p>${data.genre}</p>
@@ -177,19 +177,19 @@ $(document).ready(function() {
         });
     }
 
+    const formArea = $("#formSection");
+    let timer;
+    formArea.on("mouseenter",function(){
+        $(this).css("opacity","100%");
+        clearTimeout(timer);
+    });
 
-$("#formSection").on("mouseenter",function(){
-    $(this).css('opacity','100%')
-})
+    formArea.on("mouseleave",function(){
+        timer = setTimeout(formFade, 2000);
+    });
 
-$("#formSection").on("mouseleave",function(){
-    $(this).css('opacity','10%')
-})
+    function formFade(){
+        formArea.css("opacity", "10%");
+    }
 
-
-
-
-
-//    var moviesSection = document.querySelector(".movieSection")
-// moviesSection.removeChild(moviesSection.children[2])
 });
