@@ -133,13 +133,6 @@ $(document).ready(function() {
 
 
 
-    window.addEventListener("keydown", function(e){
-        if(e.key === "Enter"){
-            newMovie(createMovie(title.val(), rating.val(), genre.val())).then(async data => {
-                $(".movieSection")[0].insertAdjacentHTML("afterbegin", await render(data));
-            });
-        }
-    })
 
     $("#submit").on("click", function (){
         newMovie(createMovie(title.val(), rating.val(), genre.val())).then(async data => {
