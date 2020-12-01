@@ -11,7 +11,7 @@ $(document).ready(function() {
     let normalize = setInterval(normal, 176);
 
     function flicker(){
-        $("#loading").css("opacity", ".2");
+        $("#loading").css("opacity", ".5");
     }
     function normal(){
         $("#loading").css("opacity", "1");
@@ -26,13 +26,12 @@ $(document).ready(function() {
     fetch(baseURL)
         .then(response => response.json())
         .then(response => {
-            setTimeout(stopFlicker, 1500);
+            setTimeout(stopFlicker, 1800);
             $("#after").css("display", "flex");
             $("#load").fadeOut(1500);
             allMovies = response;
             showMovies(allMovies);
-            canRemove();
-            canEdit();
+            editAndDeleteMovie();
         });
 
     //======RECALL THE MOVIES WITH THE EDITED VERSION OF ALL MOVIES ARRAY=======//
@@ -40,11 +39,8 @@ $(document).ready(function() {
         fetch(baseURL)
             .then(response => response.json())
             .then(response => {
-                $("#after").css("display", "flex");
-                $("#load").fadeOut(1500);
                 allMovies = response;
-                canRemove();
-                canEdit();
+                editAndDeleteMovie();
             });
     }
 
@@ -90,13 +86,7 @@ $(document).ready(function() {
     }).then(response => response.json()
     ).then(() => {
         recallGet();
-        console.log(allMovies);
-        console.log(`Success, deleted movie ${id}`);
     }).catch(error => console.log(error));
-
-
-
-
 
 
 
@@ -113,14 +103,11 @@ $(document).ready(function() {
     }
 
 
-
-
     async function showMovies(arr){
         for(let i = 0; i < arr.length; i++){
             $(".movieSection")[0].insertAdjacentHTML("beforeend", await render(arr[i]));
         }
     }
-
 
 
     function createMovie(i1, i2, i3){
@@ -136,38 +123,41 @@ $(document).ready(function() {
     async function render(data){
         return `<div class="movieCard">
                     <span id="forDelete">${data.id}</span>
-                    <button class="delete"><i class="fas fa-times-circle deleteIcon"></i></button>
+                    <button class="Edit">Edit</button>
                     <h2 class="titleOnPoster">${data.title}</h2>
                     <img src="${posterURL}${await getMovieData(data.title)}" class="poster" alt="movieImage">
                     <p>${data.rating}<i class="far fa-star starColor"></i></p>
                     <p>${data.genre}</p>
-                    <button class="Edit">Edit</button>
                 </div>`;
     }
 
 
 
+    window.addEventListener("keydown", function(e){
+        if(e.key === "Enter"){
+            newMovie(createMovie(title.val(), rating.val(), genre.val())).then(async data => {
+                $(".movieSection")[0].insertAdjacentHTML("afterbegin", await render(data));
+            });
+        }
+    })
+
     $("#submit").on("click", function (){
         newMovie(createMovie(title.val(), rating.val(), genre.val())).then(async data => {
             $(".movieSection")[0].insertAdjacentHTML("afterbegin", await render(data));
         });
-        $("#displayForm").css("display", "flex");
     });
 
 
-    function canRemove() {
-        $("body").on("click", ".delete", function () {
-            deleteMovie($(this).parent().children().first()[0].innerText).then();
-            $(this).parent().remove();
-        });
-    }
-
-
-    function canEdit() {
+    function editAndDeleteMovie() {
         $("body").on("click", ".Edit", function () {
             let newId = $(this).parent().children().first()[0].innerText;
             let card = $(this).parent();
             let newMovieObj = {};
+            $(".delete").on("click", function (){
+                deleteMovie(newId).then();
+                card.remove();
+                $("#edit").css("display", "none");
+            });
             $("#changeMovie").on("click",async function(){
                 let newTitle = $("#changeTitle").val();
                 let newGenre = $("#changeGenre").val();
