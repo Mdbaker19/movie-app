@@ -25,29 +25,21 @@
             <h3 class ="fancy">Add Another Movie</h3>
         </div>
         <div class ="bannerInput">
-        <div>
-            <h4 class ="fancy">Title</h4>
-        <input  id="title" class="formBox"  onfocus="this.value=''">
-        </div>
-        <div>
-            <h4 class ="fancy">Rating</h4>
-        <select name="rating" id="ratingStars" class="formBox">
-            <option value="" disabled selected></option>
-            <option value="1">1 Star</option>
-            <option value="2">2 Stars</option>
-            <option value="3">3 Stars</option>
-            <option value="4">4 Stars</option>
-            <option value="5">5 Stars</option>
-        </select>
-        </div>
-        <div>
-        <h4 class ="fancy">Genre</h4>
-        <input name="genre" id="genre" class="formBox">
+            <div>
+                <h4 class ="fancy">Title</h4>
+                <input  id="title" class="formBox"  onfocus="this.value=''">
+            </div>
+            <div>
+                <h4 class ="fancy" id="movieCount"></h4>
+            </div>
+            <div>
+                <h4 class ="fancy">Genre</h4>
+                <input name="genre" id="genre" class="formBox">
 
 
+            </div>
+            <button id="submit">Submit</button>
         </div>
-        <button id="submit">Submit</button>
-    </div>
     </div>
 
     <div class="movieSection">
@@ -58,17 +50,6 @@
         <label>
             New Title
             <input id="changeTitle" class="editInput">
-        </label>
-        <label>
-            New Rating
-            <select name="rating" id="changeRating" class="editInput">
-                <option value="" disabled selected>Select your Rating</option>
-                <option value="1">1 Star</option>
-                <option value="2">2 Stars</option>
-                <option value="3">3 Stars</option>
-                <option value="4">4 Stars</option>
-                <option value="5">5 Stars</option>
-            </select>
         </label>
         <label>
             New Genre
